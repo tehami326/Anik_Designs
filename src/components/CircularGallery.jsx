@@ -23,37 +23,37 @@ function autoBind(instance) {
 }
 
 function createTextTexture(
-    gl,
-    text,
-    font = '500 30px "Playfair Display", serif',
-    color = '#ffffff'
-  ) {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-  
-    ctx.font = font;
-    const metrics = ctx.measureText(text);
-  
-    const fontSize = parseInt(font.match(/\d+px/)[0], 10);
-    const width = Math.ceil(metrics.width) + 40;
-    const height = Math.ceil(fontSize * 1.4) + 20;
-  
-    canvas.width = width;
-    canvas.height = height;
-  
-    ctx.font = font;
-    ctx.fillStyle = color;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.clearRect(0, 0, width, height);
-    ctx.fillText(text.toUpperCase(), width / 2, height / 2);
-  
-    const texture = new Texture(gl, { generateMipmaps: false });
-    texture.image = canvas;
-  
-    return { texture, width, height };
-  }
-  
+  gl,
+  text,
+  font = '500 30px "Playfair Display", serif',
+  color = '#ffffff'
+) {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+
+  ctx.font = font;
+  const metrics = ctx.measureText(text);
+
+  const fontSize = parseInt(font.match(/\d+px/)[0], 10);
+  const width = Math.ceil(metrics.width) + 40;
+  const height = Math.ceil(fontSize * 1.4) + 20;
+
+  canvas.width = width;
+  canvas.height = height;
+
+  ctx.font = font;
+  ctx.fillStyle = color;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.clearRect(0, 0, width, height);
+  ctx.fillText(text.toUpperCase(), width / 2, height / 2);
+
+  const texture = new Texture(gl, { generateMipmaps: false });
+  texture.image = canvas;
+
+  return { texture, width, height };
+}
+
 
 class Title {
   constructor({ gl, plane, renderer, text, textColor = '#545050', font = '500 30px "Playfair Display", serif'
@@ -346,24 +346,24 @@ class App {
   }
   createMedias(items, bend = 1, textColor, borderRadius, font) {
     const defaultItems = [
-        {
-          image: "https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=800&q=80",
-          text: "Embroidered Cushion Covers",
-        },
-        {
-          image: "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=800&q=80",
-          text: "Luxury Curtains",
-        },
-        {
-          image: "https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=800&q=80",
-          text: "Handcrafted Quilts",
-        },
-        {
-          image: "https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=800&q=80",
-          text: "Wall Hangings",
-        },
-      ];
-      
+      {
+        image: "https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=800&q=80",
+        text: "Embroidered Cushion Covers",
+      },
+      {
+        image: "https://images.unsplash.com/photo-1615874959474-d609969a20ed?auto=format&fit=crop&w=800&q=80",
+        text: "Luxury Curtains",
+      },
+      {
+        image: "https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=800&q=80",
+        text: "Handcrafted Quilts",
+      },
+      {
+        image: "https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=800&q=80",
+        text: "Wall Hangings",
+      },
+    ];
+
     const galleryItems = items && items.length ? items : defaultItems;
     this.mediasImages = galleryItems.concat(galleryItems);
     this.medias = this.mediasImages.map((data, index) => {

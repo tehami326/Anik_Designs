@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Heart, Search, CircleUser, ShoppingCart, Info, X } from "lucide-react";
+import { Search, CircleUser, ShoppingCart, Info, X } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
@@ -23,12 +23,13 @@ const Navbar = () => {
   };
 
   return (
-    <div className="relative flex items-center px-4 sm:px-6 py-3 sm:py-4 bg-white shadow-md w-full">
+    <div className="relative flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 bg-white shadow-md w-full">
 
       {/* CENTER BRAND */}
       <h1 className="
-        absolute left-1/2 -translate-x-1/2
-        text-xl sm:text-3xl
+        absolute sm:left-1/2 left-4
+        sm:-translate-x-1/2 translate-x-0
+        text-lg sm:text-xl md:text-3xl
         font-medium uppercase tracking-[0.35em]
         font-[Playfair_Display] text-gray-900
         whitespace-nowrap
@@ -37,7 +38,7 @@ const Navbar = () => {
       </h1>
 
       {/* RIGHT ICONS */}
-      <div className="ml-auto flex items-center gap-3 sm:gap-6">
+      <div className="ml-auto flex items-center gap-3 sm:gap-6 relative z-10">
 
         {/* SEARCH ICON */}
         <Search
