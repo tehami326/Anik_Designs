@@ -23,46 +23,50 @@ const Navbar = () => {
   };
 
   return (
-    <div className="relative flex items-center px-6 py-4 bg-white shadow-md">
+    <div className="relative flex items-center px-4 sm:px-6 py-3 sm:py-4 bg-white shadow-md w-full">
 
       {/* CENTER BRAND */}
-      <h1 className="absolute left-1/2 -translate-x-1/2
-        text-3xl font-medium uppercase tracking-[0.35em]
-        font-[Playfair_Display] text-gray-900">
+      <h1 className="
+        absolute left-1/2 -translate-x-1/2
+        text-xl sm:text-3xl
+        font-medium uppercase tracking-[0.35em]
+        font-[Playfair_Display] text-gray-900
+        whitespace-nowrap
+      ">
         ANIK DESIGN
       </h1>
 
       {/* RIGHT ICONS */}
-      <div className="ml-auto flex items-center gap-6">
+      <div className="ml-auto flex items-center gap-3 sm:gap-6">
 
         {/* SEARCH ICON */}
         <Search
           onClick={() => setShowSearch(true)}
-          className="text-red-500 cursor-pointer hover:scale-110 transition"
+          className="text-red-500 cursor-pointer hover:scale-110 transition w-5 h-5 sm:w-6 sm:h-6"
         />
 
         {/* ROLE BASED USER ICON */}
         {!user && (
           <Link to="/login">
-            <CircleUser className="text-red-500 cursor-pointer hover:scale-110 transition" />
+            <CircleUser className="text-red-500 cursor-pointer hover:scale-110 transition w-5 h-5 sm:w-6 sm:h-6" />
           </Link>
         )}
 
         {user && user.role === "user" && (
           <Link to="/orders">
-            <CircleUser className="text-red-500 cursor-pointer hover:scale-110 transition" />
+            <CircleUser className="text-red-500 cursor-pointer hover:scale-110 transition w-5 h-5 sm:w-6 sm:h-6" />
           </Link>
         )}
 
         {user && user.role === "admin" && (
           <Link to="/admin/dashboard">
-            <CircleUser className="text-red-500 cursor-pointer hover:scale-110 transition" />
+            <CircleUser className="text-red-500 cursor-pointer hover:scale-110 transition w-5 h-5 sm:w-6 sm:h-6" />
           </Link>
         )}
 
         {/* CART */}
         <Link to="/cart" className="relative">
-          <ShoppingCart className="text-red-500 cursor-pointer hover:scale-110 transition" />
+          <ShoppingCart className="text-red-500 cursor-pointer hover:scale-110 transition w-5 h-5 sm:w-6 sm:h-6" />
 
           <AnimatePresence>
             {cartCount > 0 && (
@@ -81,23 +85,23 @@ const Navbar = () => {
         </Link>
 
         <Link to="/about">
-          <Info className="text-red-500 cursor-pointer hover:scale-110 transition" />
+          <Info className="text-red-500 cursor-pointer hover:scale-110 transition w-5 h-5 sm:w-6 sm:h-6" />
         </Link>
 
       </div>
 
-      {/* PREMIUM SEARCH OVERLAY */}
+      {/* SEARCH OVERLAY */}
       <AnimatePresence>
         {showSearch && (
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="absolute inset-0 bg-white flex items-center justify-center z-50"
+            className="absolute inset-0 bg-white flex items-center justify-center z-50 px-4"
           >
             <form
               onSubmit={handleSearch}
-              className="flex items-center gap-4 w-full max-w-2xl px-6"
+              className="flex items-center gap-4 w-full max-w-2xl"
             >
               <input
                 autoFocus
@@ -105,7 +109,7 @@ const Navbar = () => {
                 placeholder="Search handcrafted products..."
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                className="flex-1 border-b border-black py-3 text-lg outline-none font-playfair"
+                className="flex-1 border-b border-black py-2 sm:py-3 text-base sm:text-lg outline-none font-playfair"
               />
 
               <button type="submit">

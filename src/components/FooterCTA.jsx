@@ -1,6 +1,10 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+
 
 const FooterCTA = () => {
+  const navigate = useNavigate();
+
   return (
     <motion.section
       initial={{ opacity: 0, y: 40 }}
@@ -18,7 +22,10 @@ const FooterCTA = () => {
         and refined everyday living.
       </p>
 
-      <button className="px-10 py-3 text-xs tracking-widest uppercase border border-black hover:bg-black hover:text-white transition duration-500">
+      <button
+        onClick={() => navigate("/homeDecor")}
+        className="px-10 py-3 text-xs tracking-widest uppercase border border-black hover:bg-black hover:text-white transition duration-500"
+      >
         Explore Collection
       </button>
     </motion.section>

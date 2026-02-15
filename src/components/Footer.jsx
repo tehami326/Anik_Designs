@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const footerVariants = {
   hidden: {
@@ -9,7 +10,7 @@ const footerVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 1.2,      // slow & classy
+      duration: 1.2,
       ease: "easeOut",
     },
   },
@@ -49,20 +50,22 @@ const Footer = () => {
           <h3 className="text-sm uppercase tracking-widest text-[#e6c28b]">
             Products
           </h3>
+
           <ul className="space-y-3 text-sm text-gray-400">
             {[
-              "Cushion Covers",
-              "Napkins",
-              "Table Cloths",
-              "Table Runners",
-              "Curtains",
-              "Bedsheets",
+              { name: "Home Decor (Embroidered)", href: "/homeDecor" },
+              { name: "Cushion Covers", href: "/cushionCovers" },
+              { name: "Curtains", href: "/curtains" },
+              { name: "Quilts", href: "/quilts" },
+              { name: "Wall Hangings", href: "/wallHangings" },
             ].map((item) => (
-              <li
-                key={item}
-                className="hover:text-[#e6c28b] transition-all duration-300"
-              >
-                {item}
+              <li key={item.name}>
+                <Link
+                  to={item.href}
+                  className="hover:text-[#e6c28b] transition-all duration-300 block"
+                >
+                  {item.name}
+                </Link>
               </li>
             ))}
           </ul>
@@ -81,6 +84,7 @@ const Footer = () => {
             </p>
           </div>
         </div>
+
       </div>
 
       {/* Bottom */}
