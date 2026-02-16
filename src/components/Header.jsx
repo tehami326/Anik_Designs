@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import heroImg from "../assets/hero.webp";
+
 
 const categories = [
   { name: 'Home Decor (Embroidered)', href: '/homeDecor' },
@@ -15,8 +17,9 @@ export default function Header() {
       {/* BACKGROUND IMAGE */}
       <div
         className="absolute inset-0 -z-10 bg-cover bg-center"
-        style={{ backgroundImage: "url(/modern-styled-entryway.jpg)" }}
+        style={{ backgroundImage: `url(${heroImg})` }}
       />
+
 
       {/* DARK OVERLAY */}
       <div className="absolute inset-0 -z-10 bg-black/40" />
@@ -52,14 +55,14 @@ export default function Header() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 py-20 sm:py-32 lg:px-8 text-center sm:text-left">
         <h1
           className="
-            font-[Playfair_Display]
-            text-3xl sm:text-5xl lg:text-7xl
-            uppercase tracking-[0.3em]
-            text-white font-medium
-            leading-snug
-          "
+    font-[Playfair_Display]
+    text-4xl sm:text-5xl md:text-6xl lg:text-7xl
+    uppercase tracking-[0.25em] sm:tracking-[0.3em]
+    text-white font-medium
+    leading-tight
+  "
         >
-          Handcrafted Home Décor
+          crafted Home Décor
         </h1>
       </div>
 
