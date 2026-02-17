@@ -26,16 +26,21 @@ const Navbar = () => {
     <div className="relative flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 bg-white shadow-md w-full">
 
       {/* CENTER BRAND */}
-      <h1 className="
-        absolute sm:left-1/2 left-4
-        sm:-translate-x-1/2 translate-x-0
-        text-lg sm:text-xl md:text-3xl
-        font-medium uppercase tracking-[0.35em]
-        font-[Playfair_Display] text-gray-900
-        whitespace-nowrap
-      ">
+      <h1
+        onClick={() => navigate("/")}
+        className="
+    absolute sm:left-1/2 left-4
+    sm:-translate-x-1/2 translate-x-0
+    text-lg sm:text-xl md:text-3xl
+    font-medium uppercase tracking-[0.35em]
+    font-[Playfair_Display] text-gray-900
+    whitespace-nowrap
+    cursor-pointer
+  "
+      >
         ANIK DESIGN
       </h1>
+
 
       {/* RIGHT ICONS */}
       <div className="ml-auto flex items-center gap-3 sm:gap-6 relative z-10">

@@ -27,7 +27,8 @@ function Curtains() {
             {/* HERO SECTION */}
             <section className="relative h-[60vh] w-full">
                 <img
-                    src="https://images.unsplash.com/photo-1615874959474-d609969a20ed?q=80&w=1200&auto=format&fit=crop"
+                    src="https://images.unsplash.com/photo-1578337834535-357ad7dccdfd?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzV8fGN1cnRhaW5zfGVufDB8fDB8fHww"
+
                     alt="Curtains"
                     className="h-full w-full object-cover"
                 />
@@ -91,7 +92,9 @@ function Curtains() {
                             <div className="md:flex-1">
                                 <div className="aspect-[4/3] overflow-hidden rounded-lg shadow-lg">
                                     <img
-                                        src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2070&auto=format&fit=crop"
+                                        src="https://plus.unsplash.com/premium_photo-1676823553593-ac587b35a018?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjF8fGN1cnRhaW5zfGVufDB8fDB8fHww"
+
+
                                         alt="Featured Curtains"
                                         className="h-full w-full object-cover hover:scale-105 transition"
                                     />

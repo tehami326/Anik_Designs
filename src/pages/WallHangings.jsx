@@ -27,7 +27,7 @@ function WallHangings() {
             {/* HERO SECTION */}
             <section className="relative h-[60vh] w-full">
                 <img
-                    src="https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=1200&auto=format&fit=crop"
+                    src="https://images.unsplash.com/photo-1513519245088-0e12902e5a38?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2FsbCUyMGRlY29yfGVufDB8fDB8fHww"
                     alt="Wall Hangings"
                     className="h-full w-full object-cover"
                 />

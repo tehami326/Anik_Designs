@@ -27,7 +27,7 @@ function Quilts() {
             {/* HERO SECTION */}
             <section className="relative h-[60vh] w-full">
                 <img
-                    src="https://images.unsplash.com/photo-1618220179428-22790b461013?q=80&w=1200&auto=format&fit=crop"
+                    src="https://images.unsplash.com/photo-1594526761005-4ccdbd608d2b?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cXVpbHRzfGVufDB8fDB8fHww"
                     alt="Quilts"
                     className="h-full w-full object-cover"
                 />

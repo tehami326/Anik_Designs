@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import API from "../api/api"
 import { toast } from "react-hot-toast";
 
 const Checkout = () => {
@@ -34,42 +34,32 @@ const Checkout = () => {
         try {
             setLoading(true);
 
-            const { data } = await axios.post(
-                `${import.meta.env.VITE_API_URL}/api/orders`,
-                {
-                    items: cart,
-                    shippingDetails: {
-                        fullName: form.fullName,
-                        phone: form.phone,
-                        address: form.address,
-                        city: form.city,
-                        pincode: form.pincode,
-                    },
-                    paymentMethod: form.paymentMethod,
+            const { data } = await API.post("/api/orders", {
+                items: cart,
+                shippingDetails: {
+                    fullName: form.fullName,
+                    phone: form.phone,
+                    address: form.address,
+                    city: form.city,
+                    pincode: form.pincode,
                 },
-                {
-                    headers: {
-                        Authorization: `Bearer ${user.token}`,
-                    },
-                }
-            );
+                paymentMethod: form.paymentMethod,
+            });
 
-            // ✅ Navigate FIRST
             navigate("/order-success", {
                 state: { whatsappURL: data.whatsappURL }
             });
 
+            setTimeout(clearCart, 300);
 
-            setTimeout(() => {
-                clearCart();
-            }, 300);
-
-        } catch (error) {
-            console.error(error);
+        } catch (err) {
+            console.error(err);
+            toast.error("Order failed");
         } finally {
             setLoading(false);
         }
     };
+
 
 
     useEffect(() => {

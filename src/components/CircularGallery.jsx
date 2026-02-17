@@ -35,8 +35,8 @@ function createTextTexture(
   const metrics = ctx.measureText(text);
 
   const fontSize = parseInt(font.match(/\d+px/)[0], 10);
-  const width = Math.ceil(metrics.width) + 40;
-  const height = Math.ceil(fontSize * 1.4) + 20;
+  const width = Math.ceil(metrics.width) + 80;
+  const height = Math.ceil(fontSize * 1.8) + 40;
 
   canvas.width = width;
   canvas.height = height;
@@ -230,9 +230,10 @@ class Media {
       renderer: this.renderer,
       text: this.text,
       textColor: this.textColor,
-      fontFamily: this.font
+      font: this.font
     });
   }
+
   update(scroll, direction) {
     this.plane.position.x = this.x - scroll.current - this.extra;
 
