@@ -389,14 +389,31 @@ class App {
   onTouchDown(e) {
     this.isDown = true;
     this.scroll.position = this.scroll.current;
-    this.start = e.touches ? e.touches[0].clientX : e.clientX;
+
+    const x = e.touches ? e.touches[0].clientX : e.clientX;
+    const y = e.touches ? e.touches[0].clientY : e.clientY;
+
+    this.startX = x;
+    this.startY = y;
   }
+
   onTouchMove(e) {
     if (!this.isDown) return;
+
     const x = e.touches ? e.touches[0].clientX : e.clientX;
-    const distance = (this.start - x) * (this.scrollSpeed * 0.025);
-    this.scroll.target = this.scroll.position + distance;
+    const y = e.touches ? e.touches[0].clientY : e.clientY;
+
+    const diffX = this.startX - x;
+    const diffY = this.startY - y;
+
+
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+      e.preventDefault();
+      const distance = diffX * (this.scrollSpeed * 0.025);
+      this.scroll.target = this.scroll.position + distance;
+    }
   }
+
   onTouchUp() {
     this.isDown = false;
     this.onCheck();
@@ -448,23 +465,25 @@ class App {
     this.boundOnTouchUp = this.onTouchUp.bind(this);
     window.addEventListener('resize', this.boundOnResize);
     this.container.addEventListener('wheel', this.boundOnWheel);
-    window.addEventListener('mousedown', this.boundOnTouchDown);
+    this.container.addEventListener('mousedown', this.boundOnTouchDown);
     window.addEventListener('mousemove', this.boundOnTouchMove);
     window.addEventListener('mouseup', this.boundOnTouchUp);
-    window.addEventListener('touchstart', this.boundOnTouchDown);
-    window.addEventListener('touchmove', this.boundOnTouchMove);
-    window.addEventListener('touchend', this.boundOnTouchUp);
+
+    this.container.addEventListener('touchstart', this.boundOnTouchDown, { passive: true });
+    this.container.addEventListener('touchmove', this.boundOnTouchMove, { passive: false });
+    this.container.addEventListener('touchend', this.boundOnTouchUp);
   }
   destroy() {
     window.cancelAnimationFrame(this.raf);
     window.removeEventListener('resize', this.boundOnResize);
     this.container.removeEventListener('wheel', this.boundOnWheel);
-    window.removeEventListener('mousedown', this.boundOnTouchDown);
+    this.container.removeEventListener('mousedown', this.boundOnTouchDown);
     window.removeEventListener('mousemove', this.boundOnTouchMove);
     window.removeEventListener('mouseup', this.boundOnTouchUp);
-    window.removeEventListener('touchstart', this.boundOnTouchDown);
-    window.removeEventListener('touchmove', this.boundOnTouchMove);
-    window.removeEventListener('touchend', this.boundOnTouchUp);
+
+    this.container.removeEventListener('touchstart', this.boundOnTouchDown);
+    this.container.removeEventListener('touchmove', this.boundOnTouchMove);
+    this.container.removeEventListener('touchend', this.boundOnTouchUp);
     if (this.renderer && this.renderer.gl && this.renderer.gl.canvas.parentNode) {
       this.renderer.gl.canvas.parentNode.removeChild(this.renderer.gl.canvas);
     }
