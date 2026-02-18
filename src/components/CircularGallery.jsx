@@ -510,7 +510,7 @@ export default function CircularGallery({
     <div
       ref={containerRef}
       className="w-full h-full overflow-hidden"
-      style={{ touchAction: "pan-y" }}
+      style={{ touchAction: "auto" }}
     />
   );
 
