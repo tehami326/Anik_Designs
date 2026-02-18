@@ -448,15 +448,24 @@ class App {
     }
   }
   update() {
-    this.scroll.current = lerp(this.scroll.current, this.scroll.target, this.scroll.ease);
-    const direction = this.scroll.current > this.scroll.last ? 'right' : 'left';
-    if (this.medias) {
-      this.medias.forEach(media => media.update(this.scroll, direction));
+
+    if (!this.isScrollingPage) {
+      this.scroll.current = lerp(this.scroll.current, this.scroll.target, this.scroll.ease);
+
+      const direction = this.scroll.current > this.scroll.last ? 'right' : 'left';
+
+      if (this.medias) {
+        this.medias.forEach(media => media.update(this.scroll, direction));
+      }
+
+      this.renderer.render({ scene: this.scene, camera: this.camera });
+
+      this.scroll.last = this.scroll.current;
     }
-    this.renderer.render({ scene: this.scene, camera: this.camera });
-    this.scroll.last = this.scroll.current;
+
     this.raf = window.requestAnimationFrame(this.update.bind(this));
   }
+
   addEventListeners() {
     this.boundOnResize = this.onResize.bind(this);
     this.boundOnWheel = this.onWheel.bind(this);
@@ -464,6 +473,17 @@ class App {
     this.boundOnTouchMove = this.onTouchMove.bind(this);
     this.boundOnTouchUp = this.onTouchUp.bind(this);
     window.addEventListener('resize', this.boundOnResize);
+    this.boundScrollPause = () => {
+      this.isScrollingPage = true;
+
+      clearTimeout(this.scrollTimeout);
+      this.scrollTimeout = setTimeout(() => {
+        this.isScrollingPage = false;
+      }, 150);
+    };
+
+    window.addEventListener("scroll", this.boundScrollPause, { passive: true });
+
     this.container.addEventListener('wheel', this.boundOnWheel);
     this.container.addEventListener('mousedown', this.boundOnTouchDown);
     window.addEventListener('mousemove', this.boundOnTouchMove);
@@ -476,6 +496,7 @@ class App {
   destroy() {
     window.cancelAnimationFrame(this.raf);
     window.removeEventListener('resize', this.boundOnResize);
+    window.removeEventListener("scroll", this.boundScrollPause);
     this.container.removeEventListener('wheel', this.boundOnWheel);
     this.container.removeEventListener('mousedown', this.boundOnTouchDown);
     window.removeEventListener('mousemove', this.boundOnTouchMove);
