@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
+import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const statusSteps = [
     "Pending",
@@ -11,13 +13,14 @@ const statusSteps = [
 ];
 
 const OrderHistory = () => {
+    const { logout } = useAuth();
+    const navigate = useNavigate();
     const [orders, setOrders] = useState([]);
 
     useEffect(() => {
         const fetchOrders = async () => {
             try {
                 const storedUser = JSON.parse(localStorage.getItem("anik_user"));
-
                 if (!storedUser?.token) return;
 
                 const { data } = await axios.get(
@@ -38,7 +41,6 @@ const OrderHistory = () => {
         fetchOrders();
     }, []);
 
-
     const formatDate = (date) => {
         return new Date(date).toLocaleDateString("en-IN", {
             day: "numeric",
@@ -51,11 +53,17 @@ const OrderHistory = () => {
         return statusSteps.indexOf(status);
     };
 
+    const handleLogout = () => {
+        navigate("/", { replace: true });
+        setTimeout(() => logout(), 0);
+    };
+
+
     if (!orders.length) {
         return (
-            <section className="bg-[#f7f5f2] min-h-screen flex items-center justify-center font-playfair">
+            <section className="bg-[#f7f5f2] min-h-screen flex items-center justify-center font-playfair px-4">
                 <div className="text-center space-y-6">
-                    <h1 className="text-4xl tracking-wide uppercase">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl tracking-wide uppercase">
                         No Orders Yet
                     </h1>
                     <p className="text-gray-500">
@@ -68,12 +76,36 @@ const OrderHistory = () => {
 
     return (
         <section className="bg-[#f7f5f2] min-h-screen font-playfair">
-            <div className="max-w-6xl mx-auto px-6 py-20">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
 
-                <h1 className="text-4xl tracking-[0.3em] uppercase mb-16">
-                    Order History
-                </h1>
+                {/* HEADER */}
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-6 mb-12">
 
+                    <h1 className="
+                        text-2xl sm:text-3xl md:text-4xl
+                        tracking-[0.2em] sm:tracking-[0.25em] md:tracking-[0.3em]
+                        uppercase text-center sm:text-left
+                    ">
+                        Order History
+                    </h1>
+
+                    <button
+                        onClick={handleLogout}
+                        className="
+                            border px-5 py-2 sm:px-6 sm:py-2.5
+                            text-xs sm:text-sm
+                            uppercase tracking-widest
+                            hover:bg-black hover:text-white
+                            transition
+                            w-full sm:w-auto
+                        "
+                    >
+                        Logout
+                    </button>
+
+                </div>
+
+                {/* ORDERS */}
                 <div className="space-y-12">
 
                     {orders.map((order) => (
@@ -82,11 +114,11 @@ const OrderHistory = () => {
                             initial={{ opacity: 0, y: 40 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8 }}
-                            className="bg-white p-12 shadow-xl border border-black/5 space-y-8"
+                            className="bg-white p-6 sm:p-8 md:p-12 shadow-xl border border-black/5 space-y-8"
                         >
 
                             {/* Header */}
-                            <div className="flex flex-col md:flex-row md:justify-between gap-6">
+                            <div className="flex flex-col md:flex-row md:justify-between gap-6 text-center md:text-left">
 
                                 <div>
                                     <p className="text-sm text-gray-400 uppercase tracking-widest">
@@ -117,14 +149,13 @@ const OrderHistory = () => {
 
                             </div>
 
-                            {/* 🔥 PREMIUM TRACKING BAR */}
+                            {/* Tracking Bar */}
                             <div className="pt-6">
-                                <div className="flex justify-between items-center relative">
+                                <div className="flex justify-between items-center relative overflow-x-auto sm:overflow-visible">
 
                                     {statusSteps.map((step, index) => (
-                                        <div key={step} className="flex-1 flex flex-col items-center relative">
+                                        <div key={step} className="flex-1 min-w-[70px] flex flex-col items-center relative">
 
-                                            {/* Circle */}
                                             <div
                                                 className={`w-4 h-4 rounded-full transition-all duration-500
                                                 ${index <= getStepIndex(order.status)
@@ -133,12 +164,10 @@ const OrderHistory = () => {
                                                     }`}
                                             ></div>
 
-                                            {/* Label */}
                                             <span className="text-xs mt-3 text-gray-600 text-center">
                                                 {step}
                                             </span>
 
-                                            {/* Line */}
                                             {index !== statusSteps.length - 1 && (
                                                 <div
                                                     className={`absolute top-2 left-1/2 w-full h-[2px] -z-10 transition-all duration-500
@@ -148,6 +177,7 @@ const OrderHistory = () => {
                                                         }`}
                                                 ></div>
                                             )}
+
                                         </div>
                                     ))}
 
@@ -174,7 +204,7 @@ const OrderHistory = () => {
                             </div>
 
                             {/* Footer */}
-                            <div className="border-t pt-8 flex flex-col md:flex-row md:justify-between gap-6">
+                            <div className="border-t pt-8 flex flex-col md:flex-row md:justify-between gap-6 text-center md:text-left">
 
                                 <div>
                                     <p className="text-sm text-gray-400 uppercase tracking-widest">
@@ -198,7 +228,7 @@ const OrderHistory = () => {
                                     </p>
                                 </div>
 
-                                <div className="text-right">
+                                <div className="text-center md:text-right">
                                     <p className="text-sm text-gray-400 uppercase tracking-widest">
                                         Total
                                     </p>

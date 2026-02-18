@@ -34,6 +34,9 @@ const Checkout = () => {
         try {
             setLoading(true);
 
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 10000);
+
             const { data } = await API.post("/api/orders", {
                 items: cart,
                 shippingDetails: {
@@ -44,7 +47,9 @@ const Checkout = () => {
                     pincode: form.pincode,
                 },
                 paymentMethod: form.paymentMethod,
-            });
+            }, { signal: controller.signal });
+
+            clearTimeout(timeout);
 
             navigate("/order-success", {
                 state: { whatsappURL: data.whatsappURL }
@@ -53,8 +58,12 @@ const Checkout = () => {
             setTimeout(clearCart, 300);
 
         } catch (err) {
+            if (err.name === "CanceledError" || err.code === "ERR_CANCELED") {
+                toast.error("Server is taking too long. Please try again.");
+            } else {
+                toast.error("Order failed. Please try again.");
+            }
             console.error(err);
-            toast.error("Order failed");
         } finally {
             setLoading(false);
         }
