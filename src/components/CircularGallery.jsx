@@ -408,9 +408,11 @@ class App {
 
 
     if (Math.abs(diffX) > Math.abs(diffY)) {
-      e.preventDefault();
       const distance = diffX * (this.scrollSpeed * 0.025);
       this.scroll.target = this.scroll.position + distance;
+    } else {
+
+      this.isDown = false;
     }
   }
 
@@ -490,7 +492,7 @@ class App {
     window.addEventListener('mouseup', this.boundOnTouchUp);
 
     this.container.addEventListener('touchstart', this.boundOnTouchDown, { passive: true });
-    this.container.addEventListener('touchmove', this.boundOnTouchMove, { passive: false });
+    this.container.addEventListener('touchmove', this.boundOnTouchMove, { passive: true });
     this.container.addEventListener('touchend', this.boundOnTouchUp);
   }
   destroy() {
