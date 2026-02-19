@@ -348,8 +348,8 @@ class App {
   createMedias(items, bend = 1, textColor, borderRadius, font) {
     const defaultItems = [
       {
-        image: "https://images.unsplash.com/photo-1691256676366-370303d55b61?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Y3VzaGlvbnxlbnwwfHwwfHx8MA%3D%3D",
-        text: "Embroidered Cushion Covers",
+        image: "https://m.media-amazon.com/images/I/A1doTmFYjfL.jpg",
+        text: "Cushion Covers",
       },
       {
         image: "https://images.unsplash.com/photo-1628428988931-14bc33099075?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8Y3VydGFpbnN8ZW58MHx8MHx8fDA%3D",
