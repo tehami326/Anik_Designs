@@ -35,7 +35,7 @@ import SearchResults from "./pages/SearchResults";
 const App = () => {
   return (
     <Router>
-      <div className="font-playfair bg-white overflow-x-hidden">
+      <div className="font-playfair bg-white">
 
         {/* Persistent Navbar */}
         <Navbar />
