@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import { motion, AnimatePresence } from "framer-motion";
+import aniklogo_transparent from "../assets/aniklogo_transparent.png";
 
 const Navbar = () => {
   const { cartCount } = useCart();
@@ -25,54 +26,55 @@ const Navbar = () => {
   return (
     <div className="relative flex items-center justify-between px-4 sm:px-6 py-3 sm:py-4 bg-white shadow-md w-full">
 
-      {/* CENTER BRAND */}
-      <h1
+      {/* LOGO CENTER */}
+      <img
+        src={aniklogo_transparent}
+        alt="Anik Design"
         onClick={() => navigate("/")}
         className="
-    absolute sm:left-1/2 left-4
-    sm:-translate-x-1/2 translate-x-0
-    text-lg sm:text-xl md:text-3xl
-    font-medium uppercase tracking-[0.35em]
-    font-[Playfair_Display] text-gray-900
-    whitespace-nowrap
-    cursor-pointer
-  "
-      >
-        ANIK DESIGN
-      </h1>
+absolute 
+left-4 sm:left-1/2
+sm:-translate-x-1/2
+h-16 sm:h-24 md:h-28 lg:h-32
+object-contain
+cursor-pointer
+select-none
+"
 
+
+      />
 
       {/* RIGHT ICONS */}
       <div className="ml-auto flex items-center gap-3 sm:gap-6 relative z-10">
 
-        {/* SEARCH ICON */}
+        {/* SEARCH */}
         <Search
           onClick={() => setShowSearch(true)}
           className="text-red-500 cursor-pointer hover:scale-110 transition w-5 h-5 sm:w-6 sm:h-6"
         />
 
-        {/* ROLE BASED USER ICON */}
+        {/* USER */}
         {!user && (
           <Link to="/login">
-            <CircleUser className="text-red-500 cursor-pointer hover:scale-110 transition w-5 h-5 sm:w-6 sm:h-6" />
+            <CircleUser className="text-red-500 hover:scale-110 transition w-5 h-5 sm:w-6 sm:h-6" />
           </Link>
         )}
 
         {user && user.role === "user" && (
           <Link to="/orders">
-            <CircleUser className="text-red-500 cursor-pointer hover:scale-110 transition w-5 h-5 sm:w-6 sm:h-6" />
+            <CircleUser className="text-red-500 hover:scale-110 transition w-5 h-5 sm:w-6 sm:h-6" />
           </Link>
         )}
 
         {user && user.role === "admin" && (
           <Link to="/admin/dashboard">
-            <CircleUser className="text-red-500 cursor-pointer hover:scale-110 transition w-5 h-5 sm:w-6 sm:h-6" />
+            <CircleUser className="text-red-500 hover:scale-110 transition w-5 h-5 sm:w-6 sm:h-6" />
           </Link>
         )}
 
         {/* CART */}
         <Link to="/cart" className="relative">
-          <ShoppingCart className="text-red-500 cursor-pointer hover:scale-110 transition w-5 h-5 sm:w-6 sm:h-6" />
+          <ShoppingCart className="text-red-500 hover:scale-110 transition w-5 h-5 sm:w-6 sm:h-6" />
 
           <AnimatePresence>
             {cartCount > 0 && (
@@ -90,8 +92,9 @@ const Navbar = () => {
           </AnimatePresence>
         </Link>
 
+        {/* INFO */}
         <Link to="/about">
-          <Info className="text-red-500 cursor-pointer hover:scale-110 transition w-5 h-5 sm:w-6 sm:h-6" />
+          <Info className="text-red-500 hover:scale-110 transition w-5 h-5 sm:w-6 sm:h-6" />
         </Link>
 
       </div>

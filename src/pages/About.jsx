@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import aniklogo_transparent from "../assets/aniklogo_transparent.png";
 
 const About = () => {
     return (
@@ -12,8 +13,18 @@ const About = () => {
                     transition={{ duration: 1 }}
                     className="text-4xl md:text-5xl tracking-[0.25em] uppercase mb-6"
                 >
-                    About Anik Design
+                    About Anik Designs
                 </motion.h1>
+
+                {/* LOGO */}
+                <motion.img
+                    src={aniklogo_transparent}
+                    alt="Anik Design Logo"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1 }}
+                    className="mx-auto mb-8 w-40 sm:w-48 md:w-56 lg:w-64 opacity-90"
+                />
 
                 <div className="w-16 h-[1px] bg-black/30 mx-auto mb-8" />
 

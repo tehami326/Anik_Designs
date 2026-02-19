@@ -1,18 +1,13 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import aniklogo_transparent from "../assets/aniklogo_transparent.png";
 
 const footerVariants = {
-  hidden: {
-    opacity: 0,
-    y: 40,
-  },
+  hidden: { opacity: 0, y: 40 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 1.2,
-      ease: "easeOut",
-    },
+    transition: { duration: 1.2, ease: "easeOut" },
   },
 };
 
@@ -28,14 +23,19 @@ const Footer = () => {
       {/* Top divider */}
       <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#e6c28b]/40 to-transparent" />
 
-      {/* Main Section */}
-      <div className="max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16">
+      {/* Main */}
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14">
 
         {/* Brand */}
-        <div className="space-y-6">
-          <h2 className="text-2xl tracking-[0.35em] font-medium text-[#e6c28b]">
-            ANIK DESIGN
-          </h2>
+        <div className="flex flex-col space-y-5">
+
+          {/* LOGO */}
+          <img
+            src={aniklogo_transparent}
+            alt="Anik Design Logo"
+            className="w-40 sm:w-48 md:w-52 lg:w-56 object-contain opacity-95"
+            loading="lazy"
+          />
 
           <div className="w-12 h-[1px] bg-[#e6c28b]/60" />
 
@@ -62,7 +62,7 @@ const Footer = () => {
               <li key={item.name}>
                 <Link
                   to={item.href}
-                  className="hover:text-[#e6c28b] transition-all duration-300 block"
+                  className="hover:text-[#e6c28b] transition duration-300"
                 >
                   {item.name}
                 </Link>
@@ -76,6 +76,7 @@ const Footer = () => {
           <h3 className="text-sm uppercase tracking-widest text-[#e6c28b]">
             Contact
           </h3>
+
           <div className="space-y-3 text-sm text-gray-400">
             <p>+91 8800621770</p>
             <p>+91 9350005010</p>
