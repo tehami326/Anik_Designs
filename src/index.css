@@ -10,5 +10,6 @@ body {
 }
 
 canvas {
-    touch-action: auto !important;
+    touch-action: pan-y !important;
+    pointer-events: none;
 }

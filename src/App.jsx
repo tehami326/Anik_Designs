@@ -49,7 +49,7 @@ const App = () => {
               <>
                 <Header />
 
-                <section className="relative h-[600px] bg-black overflow-hidden">
+                <section className="relative h-[600px] bg-black">
                   <CircularGallery
                     bend={3}
                     textColor="#ffffff"
