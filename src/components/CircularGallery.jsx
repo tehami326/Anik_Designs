@@ -283,9 +283,25 @@ class Media {
         this.plane.program.uniforms.uViewportSizes.value = [this.viewport.width, this.viewport.height];
       }
     }
+
     this.scale = this.screen.height / 1500;
-    this.plane.scale.y = (this.viewport.height * (900 * this.scale)) / this.screen.height;
-    this.plane.scale.x = (this.viewport.width * (700 * this.scale)) / this.screen.width;
+
+    let cardWidth = (this.viewport.width * (700 * this.scale)) / this.screen.width;
+    let cardHeight = (this.viewport.height * (900 * this.scale)) / this.screen.height;
+
+    // Clamp card width to 85% of screen so it never overflows on small phones
+    const vpUnitsPerPx = this.viewport.width / this.screen.width;
+    const maxVpWidth = (this.screen.width * 0.85) * vpUnitsPerPx;
+
+    if (cardWidth > maxVpWidth) {
+      const ratio = maxVpWidth / cardWidth;
+      cardWidth = maxVpWidth;
+      cardHeight *= ratio; // keep aspect ratio
+    }
+
+    this.plane.scale.y = cardHeight;
+    this.plane.scale.x = cardWidth;
+
     this.plane.program.uniforms.uPlaneSizes.value = [this.plane.scale.x, this.plane.scale.y];
     this.padding = 2;
     this.width = this.plane.scale.x + this.padding;
@@ -310,7 +326,9 @@ class App {
     document.documentElement.classList.remove('no-js');
     this.container = container;
     this.scrollSpeed = scrollSpeed;
-    this.scroll = { ease: scrollEase, current: 0, target: 0, last: 0 };
+    const isMobile = ('ontouchstart' in window) || window.matchMedia('(max-width: 768px)').matches;
+    this.scroll = { ease: isMobile ? 0.03 : scrollEase, current: 0, target: 0, last: 0 };
+    this.lastPageScrollY = 0;
     this.onCheckDebounce = debounce(this.onCheck, 200);
     this.createRenderer();
     this.createCamera();
@@ -459,23 +477,16 @@ class App {
     }
   }
   update() {
-
-    if (!this.isScrollingPage) {
-      this.scroll.current = lerp(this.scroll.current, this.scroll.target, this.scroll.ease);
-
-      const direction = this.scroll.current > this.scroll.last ? 'right' : 'left';
-
-      if (this.medias) {
-        this.medias.forEach(media => media.update(this.scroll, direction));
-      }
-
-      this.renderer.render({ scene: this.scene, camera: this.camera });
-
-      this.scroll.last = this.scroll.current;
+    this.scroll.current = lerp(this.scroll.current, this.scroll.target, this.scroll.ease);
+    const direction = this.scroll.current > this.scroll.last ? 'right' : 'left';
+    if (this.medias) {
+      this.medias.forEach(media => media.update(this.scroll, direction));
     }
-
+    this.renderer.render({ scene: this.scene, camera: this.camera });
+    this.scroll.last = this.scroll.current;
     this.raf = window.requestAnimationFrame(this.update.bind(this));
   }
+
 
   addEventListeners() {
     this.boundOnResize = this.onResize.bind(this);
@@ -484,17 +495,22 @@ class App {
     this.boundOnTouchMove = this.onTouchMove.bind(this);
     this.boundOnTouchUp = this.onTouchUp.bind(this);
 
-    window.addEventListener('resize', this.boundOnResize);
 
-    this.boundScrollPause = () => {
-      this.isScrollingPage = true;
-      clearTimeout(this.scrollTimeout);
-      this.scrollTimeout = setTimeout(() => {
-        this.isScrollingPage = false;
-      }, 150);
+    this.boundOnPageScroll = () => {
+      const currentY = window.scrollY;
+      const delta = currentY - this.lastPageScrollY;
+      this.lastPageScrollY = currentY;
+
+      // Mobile/touch devices scroll much faster due to momentum/inertia
+      const isMobile = window.matchMedia('(max-width: 768px)').matches ||
+        ('ontouchstart' in window);
+      const multiplier = isMobile ? 0.012 : 0.05;
+
+      this.scroll.target += delta * multiplier;
+      this.onCheckDebounce();
     };
-
-    window.addEventListener("scroll", this.boundScrollPause, { passive: true });
+    window.addEventListener('resize', this.boundOnResize);
+    window.addEventListener('scroll', this.boundOnPageScroll, { passive: true });
 
     this.container.addEventListener('wheel', this.boundOnWheel, { passive: true });
     this.container.addEventListener('mousedown', this.boundOnTouchDown);
@@ -508,7 +524,7 @@ class App {
   destroy() {
     window.cancelAnimationFrame(this.raf);
     window.removeEventListener('resize', this.boundOnResize);
-    window.removeEventListener("scroll", this.boundScrollPause);
+    window.removeEventListener('scroll', this.boundOnPageScroll);
     this.container.removeEventListener('wheel', this.boundOnWheel);
     this.container.removeEventListener('mousedown', this.boundOnTouchDown);
     window.removeEventListener('mousemove', this.boundOnTouchMove);
