@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getProducts } from "../api/productApi";
-
 function Garments() {
   const [products, setProducts] = useState([]);
-
   useEffect(() => {
     const fetchProducts = async () => {
       try {
