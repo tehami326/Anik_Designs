@@ -61,7 +61,7 @@ export default function Header() {
     leading-tight
   "
         >
-          crafted Home Décor
+         Garments
         </h1>
       </div>
 
