@@ -8,7 +8,7 @@ import Products from "./components/Products";
 import Footer from "./components/Footer";
 import FooterCTA from "./components/FooterCTA";
 import ProductPage from "./pages/ProductPage";
-import HomeDecor from "./pages/HomeDecor";
+import Garments from "./pages/Garments";
 import CushionCovers from "./pages/CushionCovers";
 import Curtains from "./pages/Curtains";
 import Quilts from "./pages/Quilts";
@@ -65,7 +65,7 @@ const App = () => {
           />
 
           {/* CATEGORY PAGES */}
-          <Route path="/homeDecor" element={<HomeDecor />} />
+          <Route path="/garments" element={<Garments />} />
           <Route path="/cushionCovers" element={<CushionCovers />} />
           <Route path="/curtains" element={<Curtains />} />
           <Route path="/quilts" element={<Quilts />} />
