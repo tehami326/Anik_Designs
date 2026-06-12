@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getProducts } from "../api/productApi";
 
-function HomeDecor() {
+function Garments() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ function HomeDecor() {
       <section className="relative h-[60vh] w-full">
         <img
           src="https://images.unsplash.com/photo-1616046229478-9901c5536a45?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt="Home Decor"
+          alt="Garments"
           className="h-full w-full object-cover"
         />
 
@@ -44,7 +44,7 @@ function HomeDecor() {
         <div className="absolute inset-0 bg-black/40 flex items-center justify-center px-6">
           <div className="flex flex-row w-full max-w-6xl text-white items-center">
             <h1 className="text-4xl md:text-5xl uppercase tracking-widest flex-1">
-              Home Decor
+              Garments
             </h1>
 
             <div className="w-px h-56 bg-white mx-6"></div>
@@ -177,4 +177,4 @@ function HomeDecor() {
   );
 }
 
-export default HomeDecor;
+export default Garments;
