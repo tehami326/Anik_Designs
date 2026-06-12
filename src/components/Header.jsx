@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import heroImg from "../assets/hero.webp";
 
-
 const categories = [
-  { name: 'Home Decor (Embroidered)', href: '/homeDecor' },
+  { name: 'Garments', href: '/garments' },         
   { name: 'Cushion Covers', href: '/cushionCovers' },
   { name: 'Curtains', href: '/curtains' },
   { name: 'Quilts', href: '/quilts' },
