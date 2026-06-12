@@ -52,7 +52,7 @@ const Footer = () => {
 
           <ul className="space-y-3 text-sm text-gray-400">
             {[
-              { name: "Home Decor (Embroidered)", href: "/homeDecor" },
+              { name: "Garments", href: "/garments" },
               { name: "Cushion Covers", href: "/cushionCovers" },
               { name: "Curtains", href: "/curtains" },
               { name: "Quilts", href: "/quilts" },
