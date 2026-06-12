@@ -12,7 +12,7 @@ function Garments() {
 
         // Filter only home-decor category
         const filtered = data.filter(
-          (product) => product.category === "home-decor"
+          (product) => product.category === "garments"
         );
 
         setProducts(filtered);
