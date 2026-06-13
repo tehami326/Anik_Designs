@@ -49,7 +49,7 @@ const Cart = () => {
 
                         {cart.map((item) => (
                             <div
-                                key={item._id}
+                                key={`${item._id}-${item.selectedSize}`}  // ✅ unique key
                                 className="flex flex-col md:flex-row gap-10 border-b border-black/10 pb-12"
                             >
 
@@ -70,10 +70,10 @@ const Cart = () => {
                                             {item.name}
                                         </h2>
                                         {item.selectedSize && (
-                      <p className="text-sm tracking-widest uppercase text-gray-500">
-                        Size: {item.selectedSize}
-                        </p>
-                       )}
+                                            <p className="text-sm tracking-widest uppercase text-gray-500">
+                                                Size: {item.selectedSize}
+                                            </p>
+                                        )}
                                         <p className="text-gray-600 text-lg">
                                             ₹ {item.price}
                                         </p>
@@ -85,7 +85,7 @@ const Cart = () => {
                                         <div className="flex items-center border border-black/20">
 
                                             <button
-                                                onClick={() => decreaseQty(item._id)}
+                                                onClick={() => decreaseQty(item._id, item.selectedSize)}  // ✅
                                                 className="px-4 py-2 hover:bg-black hover:text-white transition duration-300"
                                             >
                                                 −
@@ -96,7 +96,7 @@ const Cart = () => {
                                             </span>
 
                                             <button
-                                                onClick={() => increaseQty(item._id)}
+                                                onClick={() => increaseQty(item._id, item.selectedSize)}  // ✅
                                                 className="px-4 py-2 hover:bg-black hover:text-white transition duration-300"
                                             >
                                                 +
@@ -105,7 +105,7 @@ const Cart = () => {
                                         </div>
 
                                         <button
-                                            onClick={() => removeItem(item._id)}
+                                            onClick={() => removeItem(item._id, item.selectedSize)}  // ✅
                                             className="text-sm tracking-widest uppercase text-gray-500 hover:text-black transition"
                                         >
                                             Remove
