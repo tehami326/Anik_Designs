@@ -188,38 +188,36 @@ const AdminProducts = () => {
             </div>
 
             {/* ================= PREMIUM MODAL ================= */}
-            {showModal && (
-                <div
-                    className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
-                    onClick={() => setShowModal(false)}
-                >
-                    <div
-                        className="w-full max-w-2xl bg-[#0f172a] border border-white/10 rounded-2xl p-8 relative"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <button
-                            onClick={() => setShowModal(false)}
-                            className="absolute top-4 right-4 text-gray-400 hover:text-white"
-                        >
-                            <X size={20} />
-                        </button>
+{showModal && (
+    <div
+        className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
+        onClick={() => setShowModal(false)}
+    >
+        <div
+            className="w-full max-w-2xl bg-[#0f172a] border border-white/10 rounded-2xl p-8 relative overflow-y-auto max-h-[90vh]"  
+            onClick={(e) => e.stopPropagation()}
+        >
+            <button
+                onClick={() => setShowModal(false)}
+                className="absolute top-4 right-4 text-gray-400 hover:text-white"
+            >
+                <X size={20} />
+            </button>
 
-                        <h2 className="text-2xl font-semibold mb-8">
-                            {editingProduct
-                                ? "Edit Product"
-                                : "Add Product"}
-                        </h2>
+            <h2 className="text-2xl font-semibold mb-8">
+                {editingProduct ? "Edit Product" : "Add Product"}
+            </h2>
 
-                        <ProductForm
-                            editingProduct={editingProduct}
-                            closeModal={() => {
-                                setShowModal(false);
-                                fetchProducts();
-                            }}
-                        />
-                    </div>
-                </div>
-            )}
+            <ProductForm
+                editingProduct={editingProduct}
+                closeModal={() => {
+                    setShowModal(false);
+                    fetchProducts();
+                }}
+            />
+        </div>
+    </div>
+)}
 
         </AdminLayout>
     );
