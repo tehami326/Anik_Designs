@@ -173,14 +173,20 @@ const Checkout = () => {
                             Order Summary
                         </h2>
 
-                        {cart.map((item) => (
-                            <div key={item._id} className="flex justify-between text-sm">
-                                <span>
-                                    {item.name} × {item.quantity}
-                                </span>
-                                <span>₹ {item.price * item.quantity}</span>
-                            </div>
-                        ))}
+                       
+{cart.map((item) => (
+    <div key={item._id} className="flex justify-between text-sm">
+        <span>
+            {item.name} × {item.quantity}
+            {item.selectedSize && (
+                <span className="block text-xs text-gray-400 uppercase tracking-widest">
+                    Size: {item.selectedSize}
+                </span>
+            )}
+        </span>
+        <span>₹ {item.price * item.quantity}</span>
+    </div>
+))}
 
                         <div className="border-t pt-6 flex justify-between text-lg font-semibold">
                             <span>Total</span>
