@@ -69,7 +69,11 @@ const Cart = () => {
                                         <h2 className="text-2xl uppercase tracking-wide">
                                             {item.name}
                                         </h2>
-
+                                        {item.selectedSize && (
+                      <p className="text-sm tracking-widest uppercase text-gray-500">
+                        Size: {item.selectedSize}
+                        </p>
+                       )}
                                         <p className="text-gray-600 text-lg">
                                             ₹ {item.price}
                                         </p>
