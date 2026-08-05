@@ -27,7 +27,7 @@ function Garments() {
       {/* HERO SECTION */}
       <section className="relative h-[60vh] w-full">
         <img
-          src="https://images.unsplash.com/photo-1616046229478-9901c5536a45?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Z2FybWVudHxlbnwwfHwwfHx8MA%3D%3D"
           alt="Garments"
           className="h-full w-full object-cover"
         />
