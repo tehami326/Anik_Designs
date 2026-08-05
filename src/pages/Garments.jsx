@@ -83,7 +83,7 @@ function Garments() {
           <div className="md:flex-1">
             <div className="aspect-[4/3] overflow-hidden rounded-lg shadow-lg">
               <img
-                src="https://images.unsplash.com/photo-1628152371231-936cf45eb8f3?q=80&w=387&auto=format&fit=crop"
+                src="https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Z2FybWVudHxlbnwwfHwwfHx8MA%3D%3D"
                 alt="Featured Collection"
                 className="h-full w-full object-cover hover:scale-105 transition"
               />
