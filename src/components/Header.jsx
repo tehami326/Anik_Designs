@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import heroImg from "../assets/hero.webp";
+
+const heroImg = "https://plus.unsplash.com/premium_photo-1670360414946-e33a828d1d52?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aG9tZSUyMGRlY29yfGVufDB8fDB8fHww";
 
 const categories = [
   { name: 'Garments', href: '/garments' },         
@@ -12,17 +13,13 @@ const categories = [
 export default function Header() {
   return (
     <div className="relative isolate overflow-hidden">
-
       {/* BACKGROUND IMAGE */}
       <div
         className="absolute inset-0 -z-10 bg-cover bg-center"
         style={{ backgroundImage: `url(${heroImg})` }}
       />
-
-
       {/* DARK OVERLAY */}
       <div className="absolute inset-0 -z-10 bg-black/40" />
-
       {/* CATEGORY BAR */}
       <div
         className="
@@ -43,13 +40,11 @@ export default function Header() {
             key={cat.name}
             to={cat.href}
             className="text-xs sm:text-sm hover:text-rose-300 transition whitespace-nowrap"
-
           >
             {cat.name}
           </Link>
         ))}
       </div>
-
       {/* HERO CONTENT */}
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 py-20 sm:py-32 lg:px-8 text-center sm:text-left">
         <h1
@@ -64,7 +59,6 @@ export default function Header() {
          Garments
         </h1>
       </div>
-
     </div>
   )
 }
