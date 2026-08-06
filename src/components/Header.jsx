@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const heroImg = "https://plus.unsplash.com/premium_photo-1670360414946-e33a828d1d52?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aG9tZSUyMGRlY29yfGVufDB8fDB8fHww";
+const heroImg = "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?fm=jpg&q=60&w=3000&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8aG9tZSUyMGRlY29yfGVufDB8fDB8fHww";
 
 const categories = [
   { name: 'Garments', href: '/garments' },         
